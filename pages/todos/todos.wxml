@@ -7,12 +7,14 @@
         <view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
             <icon type="{{ item.completed ? 'success' : 'circle' }}" />
             <text>{{ item.name }}</text>
-            <icon type="clear" size="16" catch:tap="removeTodoHandle" data-index="{{ index }}"/>
+            <icon type="clear" size="16" catch:tap="removeTodoHandle" data-index="{{ index }}" />
         </view>
     </view>
     <view class="footer">
-        <text>Toggle all</text>
-        <text wx:if="{{ leftCount }}">{{ leftCount }} {{ leftCount > 1 ? 'items' : 'item'}} lefsct</text>
-        <text>CLear completed</text>
+        <text bind:tap="toggleAllHandle">Toggle all</text>
+        <text wx:if="{{ leftCount }}">
+            {{ leftCount }} {{ leftCount > 1 ? 'items' : 'item'}} lefsct
+        </text>
+        <text bind:tap="clearHandle">CLear completed</text>
     </view>
 </view>

@@ -16,7 +16,8 @@ Page({
       name: "Learning HTML3",
       completed: false
     }],
-    leftCount: 2
+    leftCount: 2,
+    allCompleted: false
   },
   // input内容改变
   inputChangeHandle: function (e) {
@@ -50,11 +51,42 @@ Page({
     })
   },
   // 删除
-  removeTodoHandle:function(e){
+  removeTodoHandle: function (e) {
     var todos = this.data.todos
-    todos.splice(e.currentTarget.dataset.index,1)
+    var item = todos.splice(e.currentTarget.dataset.index, 1)[0]
+    // splice返回值=>数组
+    // console.log(item)
+    var leftCount = this.data.leftCount - (item.completed ? 0 : 1)
     this.setData({
-      todos:todos
+      todos: todos,
+      leftCount: leftCount
+    })
+  },
+  // 切换所有
+  toggleAllHandle() {
+    this.data.allCompleted = !this.data.allCompleted
+    var todos = this.data.todos
+    todos.forEach(item => {
+      item.completed = this.data.allCompleted
+    });
+    this.setData({
+      todos: todos,
+      leftCount: this.data.allCompleted ? 0 : this.data.todos.length
+    })
+  },
+  // 清除已完成的TODO(任务)
+  clearHandle() {
+    // var todos = []
+    // this.data.todos.forEach(item => {
+    //   if(!item.completed){
+    //     todos.push(item)
+    //   }
+    // });
+    var todos = this.data.todos.filter(item => {
+      return !item.completed
+    })
+    this.setData({
+      todos: todos
     })
   }
 
