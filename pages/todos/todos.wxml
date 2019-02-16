@@ -1,28 +1,18 @@
 <view class="container">
-    <view class="search">
-        <image src="../../images/plus.png" />
-        <input type="text" placeholder="Anything here..." />
+    <view class="header">
+        <image src="../../images/plus.png" bindtap="addTodoHandle" />
+        <input type="text" placeholder="Anything here..." value="{{ input }}" bindinput="inputChangeHandle" />
     </view>
     <view class="todos">
-        <view class="item">
-            <icon type="success" />
-            <text>Learning HTML</text>
-            <icon type="clear" size="16" />
-        </view>
-        <view class="item">
-            <icon type="success" />
-            <text>Learning CSS</text>
-            <icon type="clear" size="16" />
-        </view>
-        <view class="item">
-            <icon type="success" />
-            <text>Learning JavaScript</text>
-            <icon type="clear" size="16" />
+        <view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+            <icon type="{{ item.completed ? 'success' : 'circle' }}" />
+            <text>{{ item.name }}</text>
+            <icon type="clear" size="16" catch:tap="removeTodoHandle" data-index="{{ index }}"/>
         </view>
     </view>
     <view class="footer">
         <text>Toggle all</text>
-        <text>2 items left</text>
+        <text wx:if="{{ leftCount }}">{{ leftCount }} {{ leftCount > 1 ? 'items' : 'item'}} lefsct</text>
         <text>CLear completed</text>
     </view>
 </view>

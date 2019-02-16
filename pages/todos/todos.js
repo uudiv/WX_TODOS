@@ -5,62 +5,58 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    input: '',
+    todos: [{
+      name: "Learning HTML",
+      completed: false
+    }, {
+      name: "Learning HTML2",
+      completed: true
+    }, {
+      name: "Learning HTML3",
+      completed: false
+    }],
+    leftCount: 2
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  // input内容改变
+  inputChangeHandle: function (e) {
+    this.setData({
+      input: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  // 添加
+  addTodoHandle: function () {
+    if (!this.data.input) return
+    var todos = this.data.todos
+    todos.push({
+      name: this.data.input,
+      completed: false
+    })
+    this.setData({
+      todos: todos,
+      input: '',
+      leftCount: this.data.leftCount + 1
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  // 切换状态
+  toggleTodoHandle: function (e) {
+    var item = this.data.todos[e.currentTarget.dataset.index]
+    item.completed = !item.completed
+    // 根据切换后状态进行leftCount修改
+    var leftCount = this.data.leftCount + (item.completed ? -1 : 1)
+    this.setData({
+      todos: this.data.todos,
+      leftCount: leftCount
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 删除
+  removeTodoHandle:function(e){
+    var todos = this.data.todos
+    todos.splice(e.currentTarget.dataset.index,1)
+    this.setData({
+      todos:todos
+    })
   }
+
+
 })

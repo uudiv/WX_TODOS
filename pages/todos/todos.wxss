@@ -3,7 +3,7 @@
     border-top: 1rpx solid #e0e0e0;
 }
 
-.search {
+.header {
     display: flex;
     align-items: center;
     padding: 20rpx;
@@ -12,13 +12,13 @@
     border-radius: 10rpx;
 }
 
-.search image {
+.header image {
     width: 40rpx;
     height: 40rpx;
     margin-right: 20rpx;
 }
 
-.search input {
+.header input {
     flex: 1;
     color: #333;
 }
@@ -45,6 +45,11 @@
     color: #333;
     flex: 1;
     margin-left: 20rpx;
+}
+
+.todos .item.completed text {
+    color: #888;
+    text-decoration: line-through;
 }
 
 .footer {
