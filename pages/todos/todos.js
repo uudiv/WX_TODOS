@@ -10,10 +10,13 @@ Page({
       name: "Learning HTML",
       completed: false
     }, {
-      name: "Learning HTML2",
+      name: "Learning CSS",
       completed: true
     }, {
-      name: "Learning HTML3",
+      name: "Learning JavaScript",
+      completed: true
+    }, {
+      name: "Learning WeApp",
       completed: false
     }],
     leftCount: 2,

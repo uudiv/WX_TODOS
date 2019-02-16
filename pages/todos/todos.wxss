@@ -59,3 +59,11 @@
     font-size: 30rpx;
     color: #666;
 }
+
+.noTodos {
+    font-weight: bold;
+    font-size: 50rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

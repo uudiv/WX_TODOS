@@ -1,20 +1,25 @@
 <view class="container">
     <view class="header">
         <image src="../../images/plus.png" bindtap="addTodoHandle" />
-        <input type="text" placeholder="Anything here..." value="{{ input }}" bindinput="inputChangeHandle" />
+        <input type="text" placeholder="Anything here..." value="{{ input }}" bindinput="inputChangeHandle" bindconfirm="addTodoHandle" />
     </view>
-    <view class="todos">
-        <view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
-            <icon type="{{ item.completed ? 'success' : 'circle' }}" />
-            <text>{{ item.name }}</text>
-            <icon type="clear" size="16" catch:tap="removeTodoHandle" data-index="{{ index }}" />
+    <block wx:if="{{ todos.length }}">
+        <view class="todos">
+            <view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ todos }}" wx:key="{{ index }}" bindtap="toggleTodoHandle" data-index="{{ index }}">
+                <icon type="{{ item.completed ? 'success' : 'circle' }}" />
+                <text>{{ item.name }}</text>
+                <icon type="clear" size="16" catch:tap="removeTodoHandle" data-index="{{ index }}" />
+            </view>
         </view>
-    </view>
-    <view class="footer">
-        <text bind:tap="toggleAllHandle">Toggle all</text>
-        <text wx:if="{{ leftCount }}">
-            {{ leftCount }} {{ leftCount > 1 ? 'items' : 'item'}} lefsct
-        </text>
-        <text bind:tap="clearHandle">CLear completed</text>
+        <view class="footer">
+            <text bind:tap="toggleAllHandle">Toggle all</text>
+            <text wx:if="{{ leftCount }}">
+                {{ leftCount }} {{ leftCount > 1 ? 'items' : 'item'}} lefsct
+            </text>
+            <text bind:tap="clearHandle">CLear completed</text>
+        </view>
+    </block>
+    <view class="noTodos" wx:else>
+        <view>NULL</view>
     </view>
 </view>
